@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PACELINE — Curated Running Gear & Community</title>
+
+  <!-- Google Fonts: Syne & Space Grotesk / Inter for premium athletic editorial typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              cream: '#f4f1ea',
+              creamDark: '#eae5dc',
+              black: '#111111',
+              cardDark: '#171717',
+              volt: '#d8ff00',      /* Vibrant high-voltage race neon lime/yellow */
+              voltHover: '#c4ec00',
+              accentRed: '#ff4d2e',
+              border: '#ded9cd',
+              subtle: '#787570',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['"Space Grotesk"', 'Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  <style>
+    body {
+      background-color: #f4f1ea;
+      color: #111111;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .font-display {
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+    }
+
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f4f1ea;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c9c3b6;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #111111;
+    }
+
+    .badge-diagonal {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      padding: 3px 8px;
+    }
+
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Interactive modal animation */
+    .modal-backdrop {
+      background-color: rgba(17, 17, 17, 0.65);
+      backdrop-filter: blur(4px);
+    }
+  </style>
+</head>
+<body class="bg-brand-cream text-brand-black flex flex-col min-h-screen">
+
+  <!-- Top ticker / Notification announcement bar -->
+  <aside aria-label="Announcement" class="bg-brand-black text-brand-cream text-[11px] sm:text-xs py-2 px-4 border-b border-neutral-800 tracking-wider uppercase font-medium">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-1.5 sm:gap-4 text-center sm:text-left">
+      <div class="flex items-center gap-3">
+        <span class="text-neutral-400">FREE UK DELIVERY OVER £75</span>
+        <span class="text-neutral-600">/</span>
+        <span class="text-neutral-400">30-DAY RETURNS</span>
+      </div>
+      <div class="font-bold text-brand-volt tracking-widest flex items-center gap-2">
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand-volt animate-ping"></span>
+        AUTUMN '26 — NEW ARRIVALS DROPPING WEEKLY
+      </div>
+      <div class="hidden md:flex items-center gap-3 text-neutral-400">
+        <span>STORE: GLASGOW — 281/2 SAUCHIEHALL ST</span>
+        <span class="text-neutral-600">/</span>
+        <span class="hover:text-white cursor-pointer transition">EN / £ GBP</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Header -->
+  <header class="sticky top-0 z-40 bg-brand-cream/95 backdrop-blur-md border-b border-brand-border transition duration-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-10">
+        <button onclick="navigateTo('home')" class="text-2xl sm:text-3xl font-black tracking-tighter uppercase font-display hover:opacity-80 transition flex items-center gap-1.5" aria-label="PACELINE Home">
+          PACELINE
+          <span class="w-2 h-2 rounded-full bg-brand-volt inline-block"></span>
+        </button>
+
+        <!-- Desktop Navigation Items -->
+        <nav class="hidden lg:flex items-center space-x-7 text-xs font-bold uppercase tracking-wider text-brand-black" aria-label="Primary Navigation">
+          <button onclick="navigateTo('home'); filterByCollection('all')" class="nav-link hover:text-brand-subtle transition py-2 relative group">
+            Men
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-black transition-all group-hover:w-full"></span>
+          </button>
+          <button onclick="navigateTo('home'); filterByCollection('all')" class="nav-link hover:text-brand-subtle transition py-2 relative group">
+            Women
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-black transition-all group-hover:w-full"></span>
+          </button>
+          <button onclick="navigateTo('home'); filterByCollection('road')" class="nav-link hover:text-brand-subtle transition py-2 relative group">
+            Footwear
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-black transition-all group-hover:w-full"></span>
+          </button>
+          <button onclick="navigateTo('home'); filterByCollection('apparel')" class="nav-link hover:text-brand-subtle transition py-2 relative group">
+            Apparel
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-black transition-all group-hover:w-full"></span>
+          </button>
+          <button onclick="navigateTo('home'); filterByCollection('all')" class="nav-link hover:text-brand-subtle transition py-2 relative group">
+            Brands
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-black transition-all group-hover:w-full"></span>
+          </button>
+          <button onclick="navigateTo('home'); filterByCollection('sale')" class="nav-link text-brand-accentRed hover:opacity-80 transition py-2 relative group">
+            Sale
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-accentRed transition-all group-hover:w-full"></span>
+          </button>
+          <button id="about-nav-link" onclick="navigateTo('about')" class="nav-link hover:text-brand-subtle transition py-2 relative group font-black">
+            About
+            <span id="about-nav-indicator" class="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-black transition-all group-hover:w-full"></span>
+          </button>
+        </nav>
+      </div>
+
+      <!-- Action Icons (Search, Profile, Cart, Mobile Menu) -->
+      <div class="flex items-center space-x-3 sm:space-x-5 text-sm">
+        <!-- Search Trigger -->
+        <button onclick="toggleSearchModal(true)" aria-label="Search Catalog" class="p-2 hover:bg-black/5 rounded-full transition text-brand-black">
+          <i class="fa-solid fa-magnifying-glass text-lg"></i>
+        </button>
+
+        <!-- Account button -->
+        <button onclick="openToast('User account portal is in member beta for Glasgow Run Club.')" aria-label="Account" class="p-2 hover:bg-black/5 rounded-full transition text-brand-black">
+          <i class="fa-regular fa-user text-lg"></i>
+        </button>
+
+        <!-- Cart Drawer Trigger -->
+        <button onclick="toggleCartDrawer(true)" aria-label="Open Shopping Cart" class="relative p-2 hover:bg-black/5 rounded-full transition text-brand-black flex items-center">
+          <i class="fa-solid fa-bag-shopping text-lg"></i>
+          <span id="cart-counter-badge" class="ml-1 inline-flex items-center justify-center text-[10px] font-black w-4 h-4 rounded-full bg-brand-black text-brand-cream border border-white">2</span>
+        </button>
+
+        <!-- Mobile Drawer Hamburger -->
+        <button onclick="toggleMobileMenu(true)" class="lg:hidden p-2 text-brand-black hover:bg-black/5 rounded transition" aria-label="Open Mobile Menu">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div id="mobile-menu-drawer" class="fixed inset-0 z-50 transform -translate-x-full transition-transform duration-300 ease-in-out lg:hidden" aria-hidden="true">
+    <div class="fixed inset-0 bg-black/50 backdrop-blur-xs" onclick="toggleMobileMenu(false)"></div>
+    <div class="relative w-4/5 max-w-sm bg-brand-cream h-full shadow-2xl flex flex-col justify-between p-6 overflow-y-auto border-r border-brand-border">
+      <div>
+        <div class="flex items-center justify-between pb-6 border-b border-brand-border">
+          <span class="text-xl font-black font-display tracking-tight">PACELINE.</span>
+          <button onclick="toggleMobileMenu(false)" class="p-2 text-xl" aria-label="Close menu">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <nav class="mt-6 flex flex-col space-y-4 text-base font-bold uppercase tracking-wider">
+          <button onclick="navigateTo('home'); toggleMobileMenu(false)" class="text-left py-2 border-b border-brand-border/40 hover:text-neutral-500">Home</button>
+          <button onclick="navigateTo('home'); filterByCollection('all'); toggleMobileMenu(false)" class="text-left py-2 border-b border-brand-border/40 hover:text-neutral-500">Men</button>
+          <button onclick="navigateTo('home'); filterByCollection('all'); toggleMobileMenu(false)" class="text-left py-2 border-b border-brand-border/40 hover:text-neutral-500">Women</button>
+          <button onclick="navigateTo('home'); filterByCollection('road'); toggleMobileMenu(false)" class="text-left py-2 border-b border-brand-border/40 hover:text-neutral-500">Footwear</button>
+          <button onclick="navigateTo('home'); filterByCollection('apparel'); toggleMobileMenu(false)" class="text-left py-2 border-b border-brand-border/40 hover:text-neutral-500">Apparel</button>
+          <button onclick="navigateTo('home'); filterByCollection('sale'); toggleMobileMenu(false)" class="text-left py-2 text-brand-accentRed border-b border-brand-border/40 hover:opacity-80">Sale Specials</button>
+          <button onclick="navigateTo('about'); toggleMobileMenu(false)" class="text-left py-2 text-brand-black hover:text-neutral-500 font-extrabold flex items-center justify-between">
+            About Our Story <i class="fa-solid fa-arrow-right text-xs"></i>
+          </button>
+        </nav>
+      </div>
+
+      <div class="pt-8 border-t border-brand-border text-xs text-neutral-600">
+        <p class="font-bold text-brand-black mb-1">PACELINE GLASGOW</p>
+        <p>281/2 Sauchiehall St, Glasgow G2 3HQ</p>
+        <p class="mt-2 text-brand-black font-semibold">Tuesdays: 6:30PM Run Club</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Modal -->
+  <div id="search-modal" class="fixed inset-0 z-50 hidden flex items-start justify-center pt-20 px-4">
+    <div class="fixed inset-0 modal-backdrop transition-opacity" onclick="toggleSearchModal(false)"></div>
+    <div class="relative bg-white w-full max-w-2xl rounded-2xl shadow-2xl p-6 border border-brand-border z-10">
+      <div class="flex items-center justify-between pb-4 border-b border-neutral-100">
+        <div class="flex items-center gap-3 w-full">
+          <i class="fa-solid fa-magnifying-glass text-neutral-400 text-lg"></i>
+          <input type="text" id="catalog-search-input" onkeyup="handleLiveSearch(this.value)" placeholder="Search shoes, brand, marathon gear, or trail kit..." class="w-full text-base font-medium outline-none bg-transparent placeholder-neutral-400">
+        </div>
+        <button onclick="toggleSearchModal(false)" class="text-neutral-400 hover:text-black p-1 text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Quick Search Recommendations -->
+      <div id="search-results-box" class="mt-4 max-h-80 overflow-y-auto space-y-2">
+        <p class="text-xs uppercase font-bold text-neutral-400 tracking-wider mb-2">Trending Searches</p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <button onclick="quickFillSearch('Cloudmonster')" class="text-xs bg-brand-cream px-3 py-1.5 rounded-full font-medium hover:bg-brand-volt transition">Cloudmonster 2</button>
+          <button onclick="quickFillSearch('Vaporfly')" class="text-xs bg-brand-cream px-3 py-1.5 rounded-full font-medium hover:bg-brand-volt transition">Vaporfly 4</button>
+          <button onclick="quickFillSearch('Trail')" class="text-xs bg-brand-cream px-3 py-1.5 rounded-full font-medium hover:bg-brand-volt transition">Trail Running</button>
+          <button onclick="quickFillSearch('Tecton')" class="text-xs bg-brand-cream px-3 py-1.5 rounded-full font-medium hover:bg-brand-volt transition">Tecton X</button>
+        </div>
+        <div id="search-hits" class="space-y-2"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Drawer -->
+  <div id="cart-drawer-container" class="fixed inset-0 z-50 transform translate-x-full transition-transform duration-300 ease-out" aria-hidden="true">
+    <div class="fixed inset-0 bg-black/60 backdrop-blur-xs" onclick="toggleCartDrawer(false)"></div>
+    <div class="relative ml-auto w-full max-w-md bg-brand-cream h-full shadow-2xl flex flex-col border-l border-brand-border">
+      
+      <!-- Drawer Header -->
+      <div class="p-6 border-b border-brand-border flex items-center justify-between bg-brand-cream">
+        <div class="flex items-center gap-2">
+          <h2 class="text-lg font-bold font-display uppercase tracking-tight">Your Gear Bag</h2>
+          <span id="drawer-item-count" class="text-xs font-bold px-2 py-0.5 rounded-full bg-brand-volt text-brand-black">2 items</span>
+        </div>
+        <button onclick="toggleCartDrawer(false)" class="p-2 text-brand-black hover:opacity-60 transition" aria-label="Close cart">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Free Shipping Tracker -->
+      <div class="px-6 py-3 bg-brand-creamDark border-b border-brand-border text-xs">
+        <div class="flex justify-between font-bold mb-1">
+          <span id="shipping-status-label">Free UK Shipping Unlocked!</span>
+          <span class="text-brand-black">£75.00 Threshold</span>
+        </div>
+        <div class="w-full bg-brand-border h-1.5 rounded-full overflow-hidden">
+          <div id="shipping-bar-fill" class="bg-brand-black h-full w-full transition-all duration-500"></div>
+        </div>
+      </div>
+
+      <!-- Cart Items List -->
+      <div id="cart-items-wrapper" class="flex-1 overflow-y-auto p-6 space-y-4">
+        <!-- Populated via Javascript -->
+      </div>
+
+      <!-- Drawer Footer & Checkout -->
+      <div class="p-6 border-t border-brand-border bg-brand-cream space-y-4">
+        <div class="space-y-1.5 text-sm">
+          <div class="flex justify-between text-neutral-500 font-medium">
+            <span>Subtotal</span>
+            <span id="cart-subtotal-price" class="font-bold text-brand-black">£458.00</span>
+          </div>
+          <div class="flex justify-between text-neutral-500 font-medium">
+            <span>Standard UK Courier Delivery</span>
+            <span class="text-green-700 font-semibold uppercase text-xs">FREE</span>
+          </div>
+          <div class="flex justify-between text-base font-extrabold text-brand-black pt-2 border-t border-brand-border">
+            <span>Total</span>
+            <span id="cart-grandtotal-price">£458.00</span>
+          </div>
+        </div>
+
+        <button onclick="triggerCheckoutDemo()" class="w-full py-4 bg-brand-black hover:bg-neutral-800 text-white font-bold uppercase tracking-wider rounded text-xs transition duration-200 flex items-center justify-center gap-2 group shadow-lg">
+          <span>Proceed To Checkout</span>
+          <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+        </button>
+
+        <p class="text-[11px] text-center text-neutral-500">
+          <i class="fa-solid fa-shield-halved mr-1"></i> 30-Day trial run promise. Seamless returns in-store & postal.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick View Product Modal -->
+  <div id="quickview-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+    <div class="fixed inset-0 modal-backdrop" onclick="closeQuickView()"></div>
+    <div class="relative bg-brand-cream w-full max-w-3xl rounded-2xl shadow-2xl border border-brand-border overflow-hidden z-10 grid grid-cols-1 md:grid-cols-2">
+      <button onclick="closeQuickView()" class="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-white/80 hover:bg-white text-black flex items-center justify-center transition">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="bg-neutral-100 flex items-center justify-center p-6 relative">
+        <img id="qv-img" src="" alt="Shoe detail" class="w-full h-72 object-contain drop-shadow-xl hover:scale-105 transition duration-300">
+        <span id="qv-badge" class="badge-diagonal bg-brand-black text-brand-volt">NEW</span>
+      </div>
+      <div class="p-6 md:p-8 flex flex-col justify-between">
+        <div>
+          <span id="qv-brand" class="text-xs uppercase font-extrabold tracking-wider text-neutral-500">ON</span>
+          <h3 id="qv-title" class="text-2xl font-black font-display tracking-tight text-brand-black mt-1">Cloudmonster 2</h3>
+          <p id="qv-price" class="text-xl font-bold text-brand-black mt-2">£210.00</p>
+          <p id="qv-desc" class="text-xs text-neutral-600 mt-4 leading-relaxed">
+            Engineered for maximum cushioning, unmatched energy return, and long aerobic miles. Features an expanded Speedboard and hyper-responsive dual-density Helion superfoam.
+          </p>
+          
+          <!-- Size Selector -->
+          <div class="mt-6">
+            <div class="flex justify-between text-xs font-bold uppercase tracking-wider mb-2">
+              <span>Select Size </span>
+            </div>
+            <div class="grid grid-cols-5 gap-2" id="qv-size-selector">
+              <button onclick="selectSize(this)" class="size-btn py-2 text-xs font-bold border border-brand-border rounded hover:border-black bg-white focus:bg-brand-black focus:text-white transition">8</button>
+              <button onclick="selectSize(this)" class="size-btn py-2 text-xs font-bold border border-brand-border rounded hover:border-black bg-white focus:bg-brand-black focus:text-white transition">9</button>
+              <button onclick="selectSize(this)" class="size-btn py-2 text-xs font-bold border border-brand-border rounded hover:border-black bg-white focus:bg-brand-black focus:text-white transition">10</button>
+              <button onclick="selectSize(this)" class="size-btn py-2 text-xs font-bold border border-brand-border rounded hover:border-black bg-white focus:bg-brand-black focus:text-white transition">11</button>
+              <button onclick="selectSize(this)" class="size-btn py-2 text-xs font-bold border border-brand-border rounded hover:border-black bg-white focus:bg-brand-black focus:text-white transition">12</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-6 mt-6 border-t border-brand-border">
+          <button id="qv-add-btn" class="w-full py-3.5 bg-brand-black hover:bg-neutral-800 text-white font-bold uppercase tracking-wider rounded text-xs transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-plus"></i> Add To Bag
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN VIEW CONTAINER (Tabs: Home / About) -->
+  <main class="flex-1">
+
+    <!-- ========================================== -->
+    <!-- VIEW 1: HOME PAGE                          -->
+    <!-- ========================================== -->
+    <div id="view-home" class="block transition-opacity duration-300">
+      
+      <!-- Hero Section -->
+      <section class="relative bg-brand-cream border-b border-brand-border overflow-hidden">
+        <div class="relative h-[580px] sm:h-[650px] lg:h-[720px] w-full flex items-center">
+          
+          <!-- Hero Background Image (Dynamic High-Action Marathon Runner) -->
+          <div class="absolute inset-0 z-0">
+            <img 
+              src="D:\Shoe website\DCS_FrontEnd_Files\src\Home\hero_section\image1.png" 
+              alt="Runner in stride through rugged terrain" 
+              class="w-full h-full object-cover object-center filter brightness-[0.92] contrast-[1.05]"
+              loading="eager"
+            >
+            <!-- Atmospheric Darkening Gradient Overlay for Typography Contrast -->
+            <div class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-transparent"></div>
+          </div>
+
+          <!-- Hero Content Overlay -->
+          <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="max-w-2xl text-white">
+              
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/40 backdrop-blur-sm border border-brand-volt/40 text-brand-volt text-[11px] sm:text-xs font-bold tracking-widest uppercase mb-4">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-volt animate-pulse"></span>
+                Autumn / Winter '26 Collection
+              </div>
+
+              <!-- Main Hero Headline matching mockup -->
+              <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black font-display tracking-tight uppercase leading-[0.92] text-white">
+                Chase<br>Every Second.
+              </h1>
+
+              <p class="mt-5 text-sm sm:text-base text-neutral-200 max-w-lg leading-relaxed font-normal">
+                Race-day gear, trail-tested essentials, and everyday kit — curated by runners, worn on every terrain.
+              </p>
+
+              <!-- CTA Buttons matching mockup -->
+              <div class="mt-8 flex flex-wrap items-center gap-4">
+                <button onclick="scrollToCatalog()" class="px-6 sm:px-8 py-3.5 bg-brand-volt text-brand-black hover:bg-brand-voltHover font-black uppercase tracking-wider text-xs rounded transition transform hover:-translate-y-0.5 shadow-md flex items-center gap-2">
+                  <span>Shop New Arrivals</span>
+                  <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                </button>
+                <button onclick="navigateTo('about')" class="px-6 sm:px-8 py-3.5 border-2 border-white text-white hover:bg-white hover:text-black font-bold uppercase tracking-wider text-xs rounded transition">
+                  Read Our Story
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Hero Pagination Indicators matching mockup bottom right -->
+          <div class="absolute bottom-8 right-6 sm:right-12 z-10 flex items-center space-x-2">
+            <span class="w-8 h-1 rounded-full bg-brand-volt"></span>
+            <span class="w-2.5 h-1 rounded-full bg-white/50"></span>
+            <span class="w-2.5 h-1 rounded-full bg-white/50"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 01 / Shop By Category: Every Discipline. Every Distance. -->
+      <section class="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 pb-4 border-b border-brand-border gap-4">
+          <div>
+            <span class="text-xs uppercase font-extrabold tracking-widest text-brand-accentRed block mb-1">01 / Shop by category</span>
+            <h2 class="text-3xl sm:text-4xl font-black font-arial uppercase tracking-tight text-brand-black">Every discipline. Every distance.</h2>
+          </div>
+          <button onclick="scrollToCatalog()" class="text-xs font-bold uppercase tracking-wider hover:text-neutral-500 transition flex items-center gap-2 group">
+            <span>View All Collections</span>
+            <i class="fa-solid fa-arrow-right text-[11px] transition-transform group-hover:translate-x-1"></i>
+          </button>
+        </div>
+
+        <!-- 4 Grid Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          
+          <!-- Card 1: Road Running -->
+          <div onclick="filterByCollection('road'); scrollToCatalog()" class="group relative h-96 rounded-xl overflow-hidden cursor-pointer bg-neutral-900 border border-brand-border shadow-sm">
+            <img src="D:\Shoe website\DCS_FrontEnd_Files\src\Home\category_section\image1.png" alt="Road Running" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-75 group-hover:brightness-90">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+            <div class="absolute bottom-6 left-6 right-6 text-white">
+              <h3 class="text-xl font-bold font-display uppercase tracking-tight">Road Running</h3>
+              <p class="text-xs text-neutral-300 mt-1">Speed, cushion, race day.</p>
+              <span class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-volt uppercase tracking-wider mt-3 group-hover:translate-x-1 transition-transform">
+                Shop <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </span>
+            </div>
+          </div>
+
+          <!-- Card 2: Trail Running -->
+          <div onclick="filterByCollection('trail'); scrollToCatalog()" class="group relative h-96 rounded-xl overflow-hidden cursor-pointer bg-neutral-900 border border-brand-border shadow-sm">
+            <img src="D:\Shoe website\DCS_FrontEnd_Files\src\Home\category_section\image2.png" alt="Trail Running" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-75 group-hover:brightness-90">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+            <div class="absolute bottom-6 left-6 right-6 text-white">
+              <h3 class="text-xl font-bold font-display uppercase tracking-tight">Trail Running</h3>
+              <p class="text-xs text-neutral-300 mt-1">Grip, protection, elevation.</p>
+              <span class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-volt uppercase tracking-wider mt-3 group-hover:translate-x-1 transition-transform">
+                Shop <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </span>
+            </div>
+          </div>
+
+          <!-- Card 3: Apparel -->
+          <div onclick="filterByCollection('apparel'); scrollToCatalog()" class="group relative h-96 rounded-xl overflow-hidden cursor-pointer bg-neutral-900 border border-brand-border shadow-sm">
+            <img src="D:\Shoe website\DCS_FrontEnd_Files\src\Home\category_section\image3.png" alt="Apparel" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-75 group-hover:brightness-90">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+            <div class="absolute bottom-6 left-6 right-6 text-white">
+              <h3 class="text-xl font-bold font-display uppercase tracking-tight">Apparel</h3>
+              <p class="text-xs text-neutral-300 mt-1">Layers built for every mile.</p>
+              <span class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-volt uppercase tracking-wider mt-3 group-hover:translate-x-1 transition-transform">
+                Shop <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </span>
+            </div>
+          </div>
+
+          <!-- Card 4: Accessories -->
+          <div onclick="filterByCollection('accessories'); scrollToCatalog()" class="group relative h-96 rounded-xl overflow-hidden cursor-pointer bg-neutral-900 border border-brand-border shadow-sm">
+            <img src="D:\Shoe website\DCS_FrontEnd_Files\src\Home\category_section\image4.png" alt="Accessories" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-75 group-hover:brightness-90">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+            <div class="absolute bottom-6 left-6 right-6 text-white">
+              <h3 class="text-xl font-bold font-display uppercase tracking-tight">Accessories</h3>
+              <p class="text-xs text-neutral-300 mt-1">Watches, packs, fuels.</p>
+              <span class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-volt uppercase tracking-wider mt-3 group-hover:translate-x-1 transition-transform">
+                Shop <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 02 / Just Landed: New Arrivals For The Run -->
+      <section id="catalog-section" class="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-brand-border">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+          <div>
+            <span class="text-xs uppercase font-extrabold tracking-widest text-brand-accentRed block mb-1">02 / Just landed</span>
+            <h2 class="text-3xl sm:text-4xl font-black font-display uppercase tracking-tight text-brand-black">New arrivals for the run.</h2>
+          </div>
+
+          <!-- Interactive Filter Tabs matching mockup -->
+          <div class="flex flex-wrap items-center gap-2">
+            <button onclick="setActiveFilter('all', this)" class="filter-tab-btn px-4 py-2 text-xs font-bold rounded-full border border-black bg-brand-black text-brand-cream transition">
+              New In
+            </button>
+            <button onclick="setActiveFilter('best', this)" class="filter-tab-btn px-4 py-2 text-xs font-bold rounded-full border border-brand-border bg-white text-brand-black hover:border-black transition">
+              Best Sellers
+            </button>
+            <button onclick="setActiveFilter('race', this)" class="filter-tab-btn px-4 py-2 text-xs font-bold rounded-full border border-brand-border bg-white text-brand-black hover:border-black transition">
+              Race Day
+            </button>
+            <button onclick="setActiveFilter('trail', this)" class="filter-tab-btn px-4 py-2 text-xs font-bold rounded-full border border-brand-border bg-white text-brand-black hover:border-black transition">
+              Trail
+            </button>
+          </div>
+        </div>
+
+        <!-- Dynamic Product Cards Grid -->
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Populated by JavaScript with realistic marathon shoes -->
+        </div>
+      </section>
+
+      <!-- Editorial Brand Banner: Built By Runners. Worn On Every Terrain -->
+      <section class="my-16 bg-brand-cardDark text-white border-y border-neutral-800 overflow-hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-2">
+          
+          <!-- Runner on Mountain Cliff -->
+          <div class="relative h-80 sm:h-96 lg:h-full min-h-[440px]">
+            <img 
+              src="D:\Shoe website\DCS_FrontEnd_Files\src\Home\story_section\image.png" 
+              alt="Runner standing high on mountain peak looking at clouds" 
+              class="w-full h-full object-cover filter contrast-110"
+              loading="lazy"
+            >
+            <div class="absolute inset-0 bg-black/20"></div>
+          </div>
+
+          <!-- Story Details & Key Stats matching mockup -->
+          <div class="p-8 sm:p-14 lg:p-16 flex flex-col justify-center">
+            <span class="text-xs uppercase font-extrabold tracking-widest text-brand-volt block mb-3">Our Story</span>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black font-display uppercase tracking-tight text-white leading-tight">
+              Built by runners.<br>Worn on every terrain.
+            </h2>
+            <p class="mt-6 text-sm text-neutral-300 leading-relaxed font-normal">
+              PACELINE opened in 2015 with one goal — to become an all-inclusive hub for runners. Twenty seasons in, we still hand-pick every shoe, every layer, and every accessory in our range. From your first Couch to 5K to your third marathon, we prepare, empower, and equip you with zero compromise on performance or style.
+            </p>
+
+            <!-- Metrics -->
+            <div class="mt-8 pt-8 border-t border-neutral-800 grid grid-cols-3 gap-6">
+              <div>
+                <div class="text-3xl sm:text-4xl font-black font-display text-brand-volt">10+</div>
+                <div class="text-[11px] uppercase font-bold text-neutral-400 tracking-wider mt-1">Years in Sport</div>
+              </div>
+              <div>
+                <div class="text-3xl sm:text-4xl font-black font-display text-brand-volt">40+</div>
+                <div class="text-[11px] uppercase font-bold text-neutral-400 tracking-wider mt-1">Brands Stocked</div>
+              </div>
+              <div>
+                <div class="text-3xl sm:text-4xl font-black font-display text-brand-volt">1</div>
+                <div class="text-[11px] uppercase font-bold text-neutral-400 tracking-wider mt-1">Store in Glasgow</div>
+              </div>
+            </div>
+
+            <!-- Link to About page -->
+            <div class="mt-10">
+              <button onclick="navigateTo('about')" class="px-6 py-3.5 border border-white hover:bg-brand-volt hover:border-brand-volt hover:text-black font-bold uppercase tracking-wider text-xs rounded transition flex items-center gap-2 group">
+                <span>Read The Full Story</span>
+                <i class="fa-solid fa-arrow-right text-[11px] transition-transform group-hover:translate-x-1"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Dual Promos: Men's Running & Women's Running -->
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- Men's Running Card -->
+          <div class="relative rounded-2xl overflow-hidden h-96 group shadow-md border border-brand-border">
+            <img src="D:\Shoe website\DCS_FrontEnd_Files\src\Home\explore_section\image_male.png" alt="Male runner sprinting on track" class="w-full h-full object-cover filter brightness-75 group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+            <div class="absolute bottom-8 left-8 right-8 text-white">
+              <h3 class="text-3xl font-black font-display uppercase tracking-tight">Men's Running</h3>
+              <p class="text-xs text-neutral-300 mt-2">Singlets & lightweight shorts built for speed.</p>
+              <button onclick="scrollToCatalog()" class="mt-4 text-xs font-black uppercase tracking-wider text-brand-volt hover:underline flex items-center gap-2">
+                <span>Shop Now</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Women's Running Card -->
+          <div class="relative rounded-2xl overflow-hidden h-96 group shadow-md border border-brand-border">
+            <img src="D:\Shoe website\DCS_FrontEnd_Files\src\Home\explore_section\image_female.png" alt="Female runner smiling during high intensity workout" class="w-full h-full object-cover filter brightness-75 group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+            <div class="absolute bottom-8 left-8 right-8 text-white">
+              <h3 class="text-3xl font-black font-display uppercase tracking-tight">Women's Running</h3>
+              <p class="text-xs text-neutral-300 mt-2">High support sports bras and aerodynamic tights.</p>
+              <button onclick="scrollToCatalog()" class="mt-4 text-xs font-black uppercase tracking-wider text-brand-volt hover:underline flex items-center gap-2">
+                <span>Shop Now</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VIEW 2: ABOUT PAGE                         -->
+    <!-- ========================================== -->
+    <div id="view-about" class="hidden transition-opacity duration-300">
+      
+      <!-- About Story Header -->
+      <section class="pt-12 sm:pt-16 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Breadcrumb & Back -->
+        <nav class="flex items-center space-x-2 text-xs uppercase font-extrabold tracking-wider text-neutral-500 mb-6" aria-label="Breadcrumb">
+          <button onclick="navigateTo('home')" class="hover:text-black">Home</button>
+          <span>/</span>
+          <span class="text-brand-black">About</span>
+        </nav>
+
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-5xl sm:text-7xl lg:text-8xl font-black font-display uppercase tracking-tight text-brand-black leading-none">
+            Our Story
+          </h1>
+          <p class="mt-6 text-sm sm:text-base text-neutral-700 max-w-2xl mx-auto leading-relaxed">
+            At Paceline, we run on coffee, pure passion, and the endless pursuit of the ultimate running high. Founded in Glasgow, we've built a curated space for athletes of all paces, packed with every essential for modern runners.
+          </p>
+        </div>
+
+        <!-- Wide Story Hero Photo (Runners' Feet at Marathon Start) matching mockup -->
+        <div class="mt-12 rounded-2xl overflow-hidden border border-brand-border shadow-md max-w-5xl mx-auto h-72 sm:h-[420px]">
+          <img 
+            src="D:\Shoe website\DCS_FrontEnd_Files\src\About\main_story_section\image_joggers.png" 
+            alt="Crowd of marathon runner feet and legs running together at starting timing mat" 
+            class="w-full h-full object-cover filter contrast-105"
+            loading="lazy"
+          >
+        </div>
+      </section>
+
+      <!-- Editorial Split: We're all about the run. -->
+      <section class="py-14 sm:py-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-brand-border">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-start">
+          
+          <div>
+            <span class="text-xs uppercase font-extrabold tracking-widest text-brand-accentRed block mb-2">01 / Our Philosophy</span>
+            <h2 class="text-3xl sm:text-5xl font-black font-display uppercase tracking-tight text-brand-black leading-tight">
+              We're all<br>about the run.
+            </h2>
+          </div>
+
+          <div class="text-sm text-neutral-700 space-y-4 leading-relaxed">
+            <p>
+              It all started back in 2015 when our founder, Rae, couldn't find a single specialist shop in the city that genuinely cared about the experience of running rather than merely shifting shoe boxes off high shelves.
+            </p>
+            <p>
+              Paceline was built to be different: an open, community-led haven where advice is honest, every brand has earned its spot through performance, and runners gathered to share miles before talking gear.
+            </p>
+            <p>
+              Ten years on, our obsession hasn't changed. If it's on our shelves, it's because we've personally run in it.
+            </p>
+            
+            <div class="pt-4">
+              <span class="font-display font-black text-sm tracking-wide text-brand-black">— Rae Sinclair & Jamie Roy, Co-Founders</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Three Things We Won't Compromise On -->
+      <section class="py-14 sm:py-20 bg-brand-creamDark border-y border-brand-border">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="mb-12">
+            <span class="text-xs uppercase font-extrabold tracking-widest text-brand-accentRed block mb-1">02 / What Defines Us</span>
+            <h2 class="text-3xl sm:text-4xl font-black font-display uppercase tracking-tight text-brand-black">
+              Three things we won't compromise on.
+            </h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- Value Card 1 -->
+            <div class="bg-white p-8 rounded-xl border border-brand-border shadow-sm flex flex-col justify-between hover:-translate-y-1 transition duration-200">
+              <div>
+                <span class="text-4xl font-black font-display text-brand-accentRed block mb-4">01</span>
+                <h3 class="text-lg font-bold font-display uppercase text-brand-black">Curated, not sold to us.</h3>
+                <p class="text-xs text-neutral-600 mt-3 leading-relaxed">
+                  Every shoe and apparel silhouette we offer has passed rigorous testing on Scottish roads and trails. We say no to 80% of what brands pitch.
+                </p>
+              </div>
+            </div>
+
+            <!-- Value Card 2 -->
+            <div class="bg-white p-8 rounded-xl border border-brand-border shadow-sm flex flex-col justify-between hover:-translate-y-1 transition duration-200">
+              <div>
+                <span class="text-4xl font-black font-display text-lime-500 block mb-4">02</span>
+                <h3 class="text-lg font-bold font-display uppercase text-brand-black">Community over transaction.</h3>
+                <p class="text-xs text-neutral-600 mt-3 leading-relaxed">
+                  From our weekly 5K social shakeouts to marathon training long runs, we believe running is always better when shared with fellow obsessives.
+                </p>
+              </div>
+            </div>
+
+            <!-- Value Card 3 -->
+            <div class="bg-white p-8 rounded-xl border border-brand-border shadow-sm flex flex-col justify-between hover:-translate-y-1 transition duration-200">
+              <div>
+                <span class="text-4xl font-black font-display text-amber-500 block mb-4">03</span>
+                <h3 class="text-lg font-bold font-display uppercase text-brand-black">Craft in every detail.</h3>
+                <p class="text-xs text-neutral-600 mt-3 leading-relaxed">
+                  Whether analyzing your gait through 240fps slow-motion cameras or recommending sock thickness, detail is what prevents injury and unlocks PRs.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- How We Got Here (Timeline) -->
+      <section class="py-16 sm:py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12">
+          <span class="text-xs uppercase font-extrabold tracking-widest text-brand-accentRed block mb-1">03 / The Evolution</span>
+          <h2 class="text-3xl sm:text-4xl font-black font-display uppercase tracking-tight text-brand-black">How we got here.</h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          
+          <div class="border-t-2 border-brand-black pt-4">
+            <span class="text-3xl font-black font-display text-[#FF0000] block">2015</span>
+            <h3 class="text-sm font-bold uppercase mt-2">Doors open.</h3>
+            <p class="text-xs text-neutral-600 mt-2 leading-relaxed">
+              We open our shop with just 6 curated brands and a coffee maker.
+            </p>
+          </div>
+
+          <div class="border-t-2 border-brand-black pt-4">
+            <span class="text-3xl font-black font-display text-[#FF0000] block">2018</span>
+            <h3 class="text-sm font-bold uppercase mt-2">The stride lab launches.</h3>
+            <p class="text-xs text-neutral-600 mt-2 leading-relaxed">
+              Installed high-speed dual optical biomechanics cameras to offer true gait matching.
+            </p>
+          </div>
+
+          <div class="border-t-2 border-brand-black pt-4">
+            <span class="text-3xl font-black font-display text-[#FF0000] block">2022</span>
+            <h3 class="text-sm font-bold uppercase mt-2">Tuesday run club.</h3>
+            <p class="text-xs text-neutral-600 mt-2 leading-relaxed">
+              Grew into Glasgow's premier social crew, averaging 120+ runners each week rain or shine.
+            </p>
+          </div>
+
+          <div class="border-t-2 border-brand-black pt-4">
+            <span class="text-3xl font-black font-display text-[#FF0000] block">2026</span>
+            <h3 class="text-sm font-bold uppercase mt-2">10 Years in running.</h3>
+            <p class="text-xs text-neutral-600 mt-2 leading-relaxed">
+              40+ premium brand partnerships, 12,000 gait assessments completed, and still chasing.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Visit Us In Store (Split Black & Map Card) -->
+      <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 my-10">
+        <div class="rounded-2xl overflow-hidden border border-brand-border grid grid-cols-1 lg:grid-cols-2 shadow-xl">
+          
+          <!-- Dark Left Panel -->
+          <div class="bg-brand-black text-white p-8 sm:p-12 flex flex-col justify-between">
+            <div>
+              <span class="text-xs uppercase font-extrabold tracking-widest text-brand-volt block mb-4">04 / Come say hi</span>
+              <h2 class="text-4xl sm:text-4xl font-black font-display uppercase tracking-tight">Visit us in<br>THIRUMALAISAMUDRAM.</h2>
+              
+              <div class="mt-8 space-y-4 text-xs sm:text-sm text-neutral-300">
+                <div>
+                  <p class="font-bold text-white uppercase tracking-wider">Address</p>
+                  <p class="mt-1">SASTRA University, Thirumalaisamudram, Thanjavur-613401</p>
+                </div>
+                <div>
+                  <p class="font-bold text-white uppercase tracking-wider">Opening Hours</p>
+                  <p class="mt-1">Monday – Saturday: 09:30 – 18:00</p>
+                  <p>Sunday - <strong>HOLIDAY</strong></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-8">
+              <a href="https://www.google.com/maps/place/SASTRA+Deemed+University/@10.7285131,79.0184111,797m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3baabe2803211597:0x6371e96c202331c!8m2!3d10.7285131!4d79.0184111!16s%2Fm%2F0260tlk?entry=ttu&g_ep=EgoyMDI2MDkzMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3 bg-brand-volt text-black font-bold uppercase tracking-wider text-xs rounded hover:bg-white transition">
+                <i class="fa-solid fa-location-arrow"></i>
+                <span>Get Directions</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Stylized Map Visualizer matching mockup -->
+          <div class="relative bg-[#dbe8d8] min-h-[350px] flex items-center justify-center overflow-hidden">
+            <!-- Vector Grid Map Simulation with streets and pins -->
+            <svg class="w-full h-full object-cover opacity-85" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+              <rect width="600" height="400" fill="#e7eee3" />
+              <!-- Waterway -->
+              <path d="M-20,120 C100,160 140,240 80,420 L-20,420 Z" fill="#b9d6e4" />
+              <!-- River Clyde segment -->
+              <path d="M-20,290 C120,280 200,320 280,410 L-20,410 Z" fill="#b9d6e4" />
+              <!-- Street grids -->
+              <g stroke="#ffffff" stroke-width="6">
+                <line x1="80" y1="0" x2="400" y2="400" />
+                <line x1="140" y1="0" x2="480" y2="380" />
+                <line x1="220" y1="0" x2="560" y2="360" />
+                <line x1="20" y1="200" x2="600" y2="180" />
+                <line x1="50" y1="120" x2="600" y2="110" />
+                <line x1="70" y1="280" x2="600" y2="260" />
+                <line x1="300" y1="40" x2="330" y2="400" />
+                <line x1="420" y1="20" x2="460" y2="400" />
+              </g>
+              <g stroke="#c7d4c2" stroke-width="2">
+                <line x1="50" y1="50" x2="200" y2="50" />
+                <line x1="120" y1="160" x2="350" y2="160" />
+                <line x1="220" y1="220" x2="500" y2="220" />
+              </g>
+              <!-- Kelvingrove Park green patch -->
+              <path d="M480,240 C540,260 580,300 600,390 L460,400 Z" fill="#a4c68e" opacity="0.6" />
+            </svg>
+
+            <!-- Store Pin Element -->
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="relative group cursor-pointer" onclick="openToast('Paceline Glasgow: 281/2 Sauchiehall St.')">
+                <div class="w-12 h-12 rounded-full bg-brand-accentRed/30 animate-ping absolute -inset-0"></div>
+                <div class="relative w-12 h-12 rounded-full bg-brand-accentRed text-white flex items-center justify-center shadow-2xl border-2 border-white">
+                  <i class="fa-solid fa-store text-lg"></i>
+                </div>
+                <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-black text-white text-[10px] font-bold px-2 py-1 rounded whitespace-nowrap shadow-md">
+                  Paceline at SASTRA
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- The People Behind The Shop (Team Cards) -->
+      <section class="py-16 sm:py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12">
+          <span class="text-xs uppercase font-extrabold tracking-widest text-brand-accentRed block mb-1">05 / Meet The Specialists</span>
+          <h2 class="text-3xl sm:text-4xl font-black font-display uppercase tracking-tight text-brand-black">The people behind the shop.</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- Team Member 1: Rae Sinclair -->
+          <div class="bg-white rounded-2xl overflow-hidden border border-brand-border shadow-sm flex flex-col">
+            <div class="h-80 relative overflow-hidden bg-neutral-100">
+              <img src="D:\Shoe website\DCS_FrontEnd_Files\src\About\founders_section\image1.png" alt="Rae Sinclair" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500">
+              <span class="absolute bottom-4 left-4 bg-brand-volt text-brand-black text-[10px] font-black uppercase px-2.5 py-1 rounded shadow">
+                Founder & Master Fitter
+              </span>
+            </div>
+            <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="text-xl font-bold font-display uppercase text-brand-black">Rae Sinclair</h3>
+                <p class="text-xs font-semibold text-neutral-500 uppercase mt-0.5">Sub-2:45 Marathoner • Ex-Scottish Athletics</p>
+                <p class="text-xs text-neutral-600 mt-3 leading-relaxed">
+                  Rae spent 12 years testing running footwear before establishing Paceline in 2015. She oversees brand curation and conducts complex gait fitting for ultramarathoners.
+                </p>
+              </div>
+              <div class="pt-4 mt-4 border-t border-neutral-100 flex items-center justify-between text-xs text-neutral-500">
+                <span>Go-to Shoe: <strong class="text-black">Vaporfly 4</strong></span>
+                <span class="text-neutral-400">10 Yrs with Paceline</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Team Member 2: Jamie Roy -->
+          <div class="bg-white rounded-2xl overflow-hidden border border-brand-border shadow-sm flex flex-col">
+            <div class="h-80 relative overflow-hidden bg-neutral-100">
+              <img src="D:\Shoe website\DCS_FrontEnd_Files\src\About\founders_section\image2.png" alt="Jamie Roy" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500">
+              <span class="absolute bottom-4 left-4 bg-brand-volt text-brand-black text-[10px] font-black uppercase px-2.5 py-1 rounded shadow">
+                Footwear Specialist & Coach
+              </span>
+            </div>
+            <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="text-xl font-bold font-display uppercase text-brand-black">Jamie Roy</h3>
+                <p class="text-xs font-semibold text-neutral-500 uppercase mt-0.5">Highland Way FKT Finisher • Lead Coach</p>
+                <p class="text-xs text-neutral-600 mt-3 leading-relaxed">
+                  Jamie specializes in trail ergonomics and injury prevention. He leads our Tuesday Social Run Club and provides honest, pressure-free footwear guidance.
+                </p>
+              </div>
+              <div class="pt-4 mt-4 border-t border-neutral-100 flex items-center justify-between text-xs text-neutral-500">
+                <span>Go-to Shoe: <strong class="text-black">Tecton X 3</strong></span>
+                <span class="text-neutral-400">7 Yrs with Paceline</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- High Voltage Lime CTA Banner: Come Find Your Next Pair Of Shoes -->
+      <section class="bg-brand-volt py-16 sm:py-20 text-center px-4 border-y-2 border-brand-black">
+        <div class="max-w-4xl mx-auto">
+          <span class="text-xs uppercase font-black tracking-widest text-brand-black/80 block mb-2">Ready to lace up?</span>
+          <h2 class="text-4xl sm:text-6xl font-black font-display uppercase tracking-tight text-brand-black leading-tight">
+            Come find your next<br>pair of shoes.
+          </h2>
+          <div class="mt-8 flex flex-wrap justify-center gap-4">
+            <button onclick="navigateTo('home'); scrollToCatalog()" class="px-8 py-4 bg-brand-black hover:bg-neutral-800 text-white font-bold uppercase tracking-wider text-xs rounded transition shadow-lg">
+              Find Your Pair
+            </button>
+            <button onclick="openToast('Glasgow store open today until 18:00. No booking required for gait analysis!')" class="px-8 py-4 border-2 border-brand-black text-brand-black hover:bg-brand-black hover:text-white font-bold uppercase tracking-wider text-xs rounded transition">
+              Visit Us In Store
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Newsletter Section matching mockup -->
+    <section class="bg-brand-black text-white py-14 sm:py-16 px-4 border-t border-neutral-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-black font-display uppercase tracking-tight text-white">Join the Paceline club.</h2>
+            <p class="text-xs sm:text-sm text-neutral-400 mt-1 max-w-md">Early access to new shoe drops, race-day tips, and 10% off your first order.</p>
+          </div>
+
+          <form onsubmit="handleNewsletterSubmit(event)" class="flex flex-col sm:flex-row items-stretch gap-2 w-full lg:w-auto min-w-[320px] max-w-md">
+            <input 
+              type="email" 
+              id="newsletter-email" 
+              required 
+              placeholder="youremail@domain.com" 
+              class="px-4 py-3 bg-neutral-900 border border-neutral-700 rounded text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-brand-volt w-full"
+            >
+            <button type="submit" class="px-6 py-3 bg-brand-volt text-black hover:bg-brand-voltHover font-black uppercase tracking-wider text-xs rounded transition whitespace-nowrap">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer matching mockup -->
+  <footer class="bg-brand-black text-neutral-400 text-xs py-14 px-4 sm:px-6 lg:px-8 border-t border-neutral-900">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-10">
+      
+      <!-- Brand column -->
+      <div class="md:col-span-2 space-y-4">
+        <button onclick="navigateTo('home')" class="text-2xl font-black font-display uppercase tracking-tight text-white flex items-center gap-1.5">
+          PACELINE
+          <span class="w-2 h-2 rounded-full bg-brand-volt inline-block"></span>
+        </button>
+        <p class="text-xs text-neutral-400 leading-relaxed max-w-sm">
+          Race-day gear, trail-tested essentials, and everyday running kit — curated in Glasgow since 2015.
+        </p>
+        <div class="pt-2 text-xs text-neutral-500">
+          <p>Paceline Running Co. Ltd</p>
+          <p>SASTRA University, Thirumalaisamudram, Thanjavur-6134001.</p>
+        </div>
+      </div>
+
+      <!-- Links: Shop -->
+      <div>
+        <h3 class="text-white uppercase font-black tracking-wider text-xs mb-4">Shop</h3>
+        <ul class="space-y-2.5">
+          <li><button onclick="navigateTo('home'); filterByCollection('all')" class="hover:text-white transition">Men's Running</button></li>
+          <li><button onclick="navigateTo('home'); filterByCollection('all')" class="hover:text-white transition">Women's Running</button></li>
+          <li><button onclick="navigateTo('home'); filterByCollection('road')" class="hover:text-white transition">Road Footwear</button></li>
+          <li><button onclick="navigateTo('home'); filterByCollection('trail')" class="hover:text-white transition">Trail Footwear</button></li>
+          <li><button onclick="navigateTo('home'); filterByCollection('apparel')" class="hover:text-white transition">Performance Apparel</button></li>
+          <li><button onclick="navigateTo('home'); filterByCollection('sale')" class="text-brand-accentRed hover:underline">Sale & Archive</button></li>
+        </ul>
+      </div>
+
+      <!-- Links: Help & Services -->
+      <div>
+        <h3 class="text-white uppercase font-black tracking-wider text-xs mb-4">Support</h3>
+        <ul class="space-y-2.5">
+          <li>
+  <li>
+  <a href="store-details.html" 
+     class="hover:text-white transition block text-left">
+    Contact Us
+  </a>
+</li>
+
+
+
+          <li><button onclick="openToast('Standard Delivery: 2-3 Days. Free on orders over £75.')" class="hover:text-white transition">Shipping & Delivery</button></li>
+          <li><button onclick="openToast('30-Day trial run promise on all road and trail shoes.')" class="hover:text-white transition">Returns Policy</button></li>
+          <li><button onclick="openToast('Book your complimentary 30-min treadmill gait analysis in Glasgow.')" class="hover:text-white transition">Gait Analysis Booking</button></li>
+          <li><button onclick="openToast('Detailed UK to EU/US shoe sizing equivalence.')" class="hover:text-white transition">Size Guides</button></li>
+          <li><button onclick="openToast('Frequently Asked Questions.')" class="hover:text-white transition">FAQs</button></li>
+        </ul>
+      </div>
+
+      <!-- Links: Company & Community -->
+      <div>
+        <h3 class="text-white uppercase font-black tracking-wider text-xs mb-4">Company</h3>
+        <ul class="space-y-2.5">
+          <li><button onclick="navigateTo('about')" class="hover:text-white transition">About Our Story</button></li>
+          <li><button onclick="navigateTo('about')" class="hover:text-white transition">Store — Glasgow</button></li>
+          <li><button onclick="openToast('Tuesday 18:30 Social Run Club — Free to all paces.')" class="hover:text-white transition">Run Club & Community</button></li>
+          <li><button onclick="openToast('Sustainability commitment: 100% recyclable poly mailers.')" class="hover:text-white transition">Sustainability</button></li>
+          <li><button onclick="openToast('We are currently hiring 1x Part-Time Fit Specialist in Glasgow.')" class="hover:text-white transition">Careers</button></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom sub-footer -->
+    <div class="max-w-7xl mx-auto mt-12 pt-6 border-t border-neutral-800 flex flex-col sm:flex-row justify-between items-center text-[11px] text-neutral-500 gap-4">
+      <div>
+        © 2026 Paceline Running Co. — All rights reserved.
+      </div>
+      <div class="flex items-center space-x-5">
+        <button onclick="openToast('Privacy Policy updated Autumn 2026.')" class="hover:text-neutral-300">Privacy</button>
+        <button onclick="openToast('Standard Terms of sale.')" class="hover:text-neutral-300">Terms</button>
+        <button onclick="openToast('Cookie preferences managed.')" class="hover:text-neutral-300">Cookies</button>
+        <button onclick="openToast('WCAG 2.1 AA Compliant design.')" class="hover:text-neutral-300">Accessibility</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification System -->
+  <div id="toast-notification" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-brand-black text-brand-cream border border-brand-volt/50 px-5 py-3.5 rounded-lg shadow-2xl flex items-center gap-3 text-xs max-w-sm pointer-events-none">
+    <i class="fa-solid fa-circle-check text-brand-volt text-base"></i>
+    <span id="toast-message" class="font-medium">Item added to your bag.</span>
+  </div>
+
+  <script>
+    /**
+     * PACELINE E-Commerce & Interactive Application State
+     */
+
+    // Product Database directly reflecting high-end performance shoes in the mockups
+    const PRODUCTS = [
+      {
+        id: 'p1',
+        brand: 'On',
+        name: 'Cloudmonster 2',
+        colorway: 'Hyper Lily',
+        price: 210,
+        badge: 'NEW',
+        category: 'road',
+        originalPrice: 2800,
+        featured: true,
+        tag: 'race',
+        image: 'D:/Shoe website/image.png',
+        desc: 'Monster cloudtec cushioning meets energetic speedboard return. Ideal for marathon training blocks and recovery runs.'
+      },
+      {
+        id: 'p2',
+        brand: 'Nike',
+        name: 'Vaporfly 4',
+        colorway: 'Volt Ice',
+        price: 240,
+        badge: 'NEW',
+        originalPrice: 24000,
+        category: 'road',
+        featured: true,
+        tag: 'race',
+        image: 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=600&q=80',
+        desc: 'The benchmark race day weapon. Full-length carbon Flyplate paired with premier ZoomX foam for relentless marathon pace.'
+      },
+      {
+        id: 'p3',
+        brand: 'Hoka',
+        name: 'Tecton X 3',
+        colorway: 'Float / Tangerine',
+        price: 220,
+        badge: 'NEW',
+        category: 'trail',
+        originalPrice: 22000,
+        featured: true,
+        tag: 'trail',
+        image: 'D:/Shoe website/image.png',
+        desc: 'Parallel carbon fiber propulsion plates engineered specifically for unpredictable technical trails and steep ascents.'
+      },
+      {
+        id: 'p4',
+        brand: 'Asics',
+        name: 'Megablast',
+        colorway: 'White / Orange Glow',
+        price: 210,
+        badge: 'SALE',
+        originalPrice: 23000,
+        category: 'road',
+        featured: true,
+        tag: 'best',
+        image: 'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?auto=format&fit=crop&w=600&q=80',
+        desc: 'Ultra lightweight bouncy FF BLAST TURBO foam engineered to give everyday tempo workouts pure race feel.'
+      },
+      {
+        id: 'p5',
+        brand: 'Saucony',
+        name: 'Endorphin Elite',
+        colorway: 'Acid Slime',
+        price: 280,
+        badge: 'HOT',
+        originalPrice: 28000, 
+        category: 'road',
+        featured: false,
+        tag: 'race',
+        image: 'https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=600&q=80',
+        desc: 'Pebax-based PWRRUN HG superfoam with slotted carbon plate engineered to propel your longest continuous tempo efforts.'
+      },
+      {
+        id: 'p6',
+        brand: 'Salomon',
+        name: 'S/LAB Genesis',
+        colorway: 'Black Racing Red',
+        price: 190,
+        badge: 'TRAIL',
+        category: 'trail',
+        originalPrice: 19000,
+        featured: false,
+        tag: 'trail',
+        image: 'https://images.unsplash.com/photo-1514989940723-e8e51635b782?auto=format&fit=crop&w=600&q=80',
+        desc: 'High-durability Matryx upper woven with Kevlar thread. Designed to withstand rocky alpine ridgelines with confidence.'
+      },
+      {
+        id: 'p7',
+        brand: 'Tracksmith',
+        name: 'Strata Race Singlet',
+        colorway: 'Ivory / Navy',
+        price: 95,
+        badge: 'APPAREL',
+        category: 'apparel',
+        originalPrice: 95000,
+        featured: false,
+        tag: 'best',
+        image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80',
+        desc: 'Swiss-engineered silk-weight knit designed for extreme breathability on humid race mornings.'
+      },
+      {
+        id: 'p8',
+        brand: 'Garmin',
+        name: 'Forerunner 965',
+        colorway: 'Titanium Grey',
+        price: 599,
+        badge: 'TECH',
+        category: 'accessories',
+        originalPrice: 600,
+        featured: false,
+        tag: 'best',
+        image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80',
+        desc: 'Brilliant AMOLED touchscreen display with built-in full color mapping, training readiness, and multiband GPS.'
+      }
+    ];
+
+    // Live Cart State initially seeded to match mockups
+    let cart = [
+      {
+        id: 'p1',
+        name: 'Cloudmonster 2',
+        colorway: 'Hyper Lily',
+        size: '8',
+        price: 210,
+        quantity: 1,
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=300&q=80'
+      },
+      {
+        id: 'p2',
+        name: 'Vaporfly 4',
+        colorway: 'Volt Ice',
+        size: '9',
+        price: 248,
+        quantity: 1,
+        image: 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=300&q=80'
+      }
+    ];
+
+    let currentActiveFilter = 'all';
+
+    /**
+     * Seamless Single Page Navigation between Home & About
+     */
+    function navigateTo(page) {
+      const homeView = document.getElementById('view-home');
+      const aboutView = document.getElementById('view-about');
+      const aboutIndicator = document.getElementById('about-nav-indicator');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if (page === 'about') {
+        homeView.classList.add('hidden');
+        aboutView.classList.remove('hidden');
+        if (aboutIndicator) aboutIndicator.classList.add('w-full');
+      } else {
+        aboutView.classList.add('hidden');
+        homeView.classList.remove('hidden');
+        if (aboutIndicator) aboutIndicator.classList.remove('w-full');
+      }
+    }
+
+    function scrollToCatalog() {
+      navigateTo('home');
+      const catalogEl = document.getElementById('catalog-section');
+      if (catalogEl) {
+        catalogEl.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    /**
+     * Render Catalog Products based on active filter or collection
+     */
+    function renderProducts(items) {
+      const grid = document.getElementById('products-grid');
+      if (!grid) return;
+
+      grid.innerHTML = items.map(product => {
+        const isSale = product.badge === 'SALE';
+        const badgeColor = isSale ? 'bg-brand-accentRed text-white' : 'bg-brand-black text-brand-volt';
+
+        return `
+          <div class="group bg-white rounded-xl border border-brand-border overflow-hidden flex flex-col justify-between transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            <div class="relative bg-brand-cream/40 p-6 flex items-center justify-center h-64 overflow-hidden">
+              <span class="badge-diagonal ${badgeColor}">${product.badge}</span>
+              
+              <button onclick="toggleWishlist(this, '${product.name}')" aria-label="Favorite" class="absolute top-3 right-3 text-neutral-400 hover:text-brand-accentRed transition p-1 text-sm">
+                <i class="fa-regular fa-heart"></i>
+              </button>
+
+              <img 
+                src="${product.image}" 
+                alt="${product.name}" 
+                class="max-h-52 w-auto object-contain transition-transform duration-500 group-hover:scale-110 drop-shadow-md"
+                loading="lazy"
+                onerror="this.src='https://placehold.co/400x300/f4f1ea/111111?text=PACELINE+GEAR'"
+              >
+
+              <!-- Quick View overlay button -->
+              <button 
+  onclick="openQuickView('${product.id}')"
+  class="absolute bottom-3 inset-x-4 
+         bg-brand-black/90 hover:bg-brand-blue 
+         text-white text-[11px] font-bold uppercase tracking-wider 
+         py-2.5 rounded 
+         transition-colors duration-300 ease-in-out">
+  Quick Look
+</button>
+
+
+            </div>
+
+            <!-- Product info matching mockup typography -->
+            <div class="p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <span class="text-[10px] uppercase font-black tracking-widest text-neutral-400 block">${product.brand}</span>
+                <h3 class="text-sm font-black font-display text-brand-black uppercase tracking-tight mt-0.5">${product.name} — <span class="text-neutral-500 font-medium normal-case">${product.colorway}</span></h3>
+              </div>
+              
+              <div class="mt-4 pt-3 border-t border-neutral-100 flex items-center justify-between">
+                <div>
+                  <span class="text-sm font-black text-brand-black">£${product.price}</span>
+                  ${product.originalPrice ? `<span class="text-xs text-neutral-400 line-through ml-1.5">£${product.originalPrice}</span>` : ''}
+                </div>
+                <button onclick="addToCart('${product.id}')" class="w-8 h-8 rounded-full bg-brand-black hover:bg-brand-volt text-white hover:text-black flex items-center justify-center transition" title="Add to bag">
+                  <i class="fa-solid fa-plus text-xs"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /**
+     * Filter Products by Sub-tags
+     */
+    function setActiveFilter(filterKey, buttonElem) {
+      currentActiveFilter = filterKey;
+
+      // Update button styling
+      document.querySelectorAll('.filter-tab-btn').forEach(btn => {
+        btn.classList.remove('bg-brand-black', 'text-brand-cream');
+        btn.classList.add('bg-white', 'text-brand-black');
+      });
+      if (buttonElem) {
+        buttonElem.classList.remove('bg-white', 'text-brand-black');
+        buttonElem.classList.add('bg-brand-black', 'text-brand-cream');
+      }
+
+      if (filterKey === 'all') {
+        renderProducts(PRODUCTS);
+      } else {
+        const filtered = PRODUCTS.filter(p => p.tag === filterKey || p.category === filterKey);
+        renderProducts(filtered);
+      }
+    }
+
+    /**
+     * Filter Products by Top Categories (Road, Trail, Apparel)
+     */
+    function filterByCollection(category) {
+      navigateTo('home');
+      if (category === 'all') {
+        renderProducts(PRODUCTS);
+      } else if (category === 'sale') {
+        renderProducts(PRODUCTS.filter(p => p.badge === 'SALE' || p.originalPrice));
+      } else {
+        renderProducts(PRODUCTS.filter(p => p.category === category));
+      }
+    }
+
+    /**
+     * Cart Drawer Open & Close
+     */
+    function toggleCartDrawer(open) {
+      const drawer = document.getElementById('cart-drawer-container');
+      if (!drawer) return;
+      if (open) {
+        renderCartUI();
+        drawer.classList.remove('translate-x-full');
+        document.body.classList.add('overflow-hidden');
+      } else {
+        drawer.classList.add('translate-x-full');
+        document.body.classList.remove('overflow-hidden');
+      }
+    }
+
+    /**
+     * Add Item into Cart
+     */
+    function addToCart(productId, size = 'UK 9') {
+      const product = PRODUCTS.find(p => p.id === productId);
+      if (!product) return;
+
+      const existing = cart.find(item => item.id === productId && item.size === size);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          colorway: product.colorway,
+          size: size,
+          price: product.price,
+          quantity: 1,
+          image: product.image
+        });
+      }
+
+      updateCartBadge();
+      openToast(`Added ${product.name} (${size}) to your bag.`);
+      toggleCartDrawer(true);
+    }
+
+    /**
+     * Update Quantity in Cart
+     */
+    function updateCartQty(index, delta) {
+      if (!cart[index]) return;
+      cart[index].quantity += delta;
+      if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
+      }
+      renderCartUI();
+      updateCartBadge();
+    }
+
+    /**
+     * Remove Item from Cart
+     */
+    function removeCartItem(index) {
+      cart.splice(index, 1);
+      renderCartUI();
+      updateCartBadge();
+    }
+
+    /**
+     * Recalculate and Render Cart Drawer
+     */
+    function renderCartUI() {
+      const wrapper = document.getElementById('cart-items-wrapper');
+      const badgeCount = document.getElementById('drawer-item-count');
+      const subtotalEl = document.getElementById('cart-subtotal-price');
+      const grandtotalEl = document.getElementById('cart-grandtotal-price');
+      const shippingStatus = document.getElementById('shipping-status-label');
+      const shippingBar = document.getElementById('shipping-bar-fill');
+
+      if (!wrapper) return;
+
+      const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+      const subtotal = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+
+      badgeCount.textContent = `${totalItems} item${totalItems === 1 ? '' : 's'}`;
+      subtotalEl.textContent = `£${subtotal.toFixed(2)}`;
+      grandtotalEl.textContent = `£${subtotal.toFixed(2)}`;
+
+      // Free shipping threshold check (£75)
+      const threshold = 75;
+      if (subtotal >= threshold) {
+        shippingStatus.textContent = 'Free UK Shipping Unlocked!';
+        shippingStatus.classList.remove('text-neutral-700');
+        shippingStatus.classList.add('text-green-700');
+        shippingBar.style.width = '100%';
+        shippingBar.classList.remove('bg-neutral-400');
+        shippingBar.classList.add('bg-green-600');
+      } else {
+        const remaining = threshold - subtotal;
+        shippingStatus.textContent = `Add £${remaining.toFixed(2)} more for Free Shipping`;
+        shippingStatus.classList.remove('text-green-700');
+        shippingStatus.classList.add('text-neutral-700');
+        const percentage = Math.min(100, Math.round((subtotal / threshold) * 100));
+        shippingBar.style.width = `${percentage}%`;
+        shippingBar.classList.add('bg-neutral-400');
+      }
+
+      if (cart.length === 0) {
+        wrapper.innerHTML = `
+          <div class="text-center py-16 text-neutral-400">
+            <i class="fa-solid fa-shoe-prints text-4xl mb-3 opacity-40"></i>
+            <p class="text-sm font-bold text-brand-black">Your bag is empty.</p>
+            <p class="text-xs text-neutral-500 mt-1">Ready to log some miles? Explore our new arrivals.</p>
+            <button onclick="toggleCartDrawer(false); scrollToCatalog()" class="mt-6 px-6 py-2.5 bg-brand-black text-white text-xs font-bold uppercase rounded">
+              Start Shopping
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      wrapper.innerHTML = cart.map((item, index) => `
+        <div class="flex gap-4 p-3 bg-white rounded-lg border border-brand-border">
+          <div class="w-20 h-20 bg-brand-cream/60 rounded flex items-center justify-center p-2 flex-shrink-0">
+            <img src="${item.image}" alt="${item.name}" class="max-w-full max-h-full object-contain">
+          </div>
+          <div class="flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start">
+                <h4 class="text-xs font-bold font-display uppercase tracking-tight text-brand-black">${item.name}</h4>
+                <button onclick="removeCartItem(${index})" class="text-neutral-400 hover:text-black p-1 text-xs" title="Remove">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+              <p class="text-[11px] text-neutral-500">${item.colorway} • <span class="font-bold text-neutral-700">${item.size}</span></p>
+            </div>
+            
+            <div class="flex justify-between items-center mt-2 pt-2 border-t border-neutral-100">
+              <div class="flex items-center border border-brand-border rounded text-xs bg-white">
+                <button onclick="updateCartQty(${index}, -1)" class="px-2 py-0.5 hover:bg-neutral-100 text-neutral-600 font-bold">-</button>
+                <span class="px-2 font-bold">${item.quantity}</span>
+                <button onclick="updateCartQty(${index}, 1)" class="px-2 py-0.5 hover:bg-neutral-100 text-neutral-600 font-bold">+</button>
+              </div>
+              <span class="text-xs font-bold text-brand-black">£${(item.price * item.quantity).toFixed(2)}</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function updateCartBadge() {
+      const badge = document.getElementById('cart-counter-badge');
+      const total = cart.reduce((acc, item) => acc + item.quantity, 0);
+      if (badge) badge.textContent = total;
+    }
+
+    function triggerCheckoutDemo() {
+      if (cart.length === 0) {
+        openToast('Please add items to your gear bag first!');
+        return;
+      }
+      openToast('Connecting to PACELINE secure checkout demo...');
+    }
+
+    /**
+     * Quick View Modal Details
+     */
+    let selectedQuickViewShoe = null;
+    let selectedQuickViewSize = 'UK 9';
+
+    function openQuickView(productId) {
+      const product = PRODUCTS.find(p => p.id === productId);
+      if (!product) return;
+
+      selectedQuickViewShoe = product;
+      selectedQuickViewSize = 'UK 9';
+
+      document.getElementById('qv-img').src = product.image;
+      document.getElementById('qv-badge').textContent = product.badge;
+      document.getElementById('qv-brand').textContent = product.brand;
+      document.getElementById('qv-title').textContent = `${product.name} — ${product.colorway}`;
+      document.getElementById('qv-price').textContent = `£${product.price}.00`;
+      document.getElementById('qv-desc').textContent = product.desc;
+
+      const addBtn = document.getElementById('qv-add-btn');
+      addBtn.onclick = () => {
+        addToCart(product.id, selectedQuickViewSize);
+        closeQuickView();
+      };
+
+      document.getElementById('quickview-modal').classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeQuickView() {
+      document.getElementById('quickview-modal').classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    }
+
+    function selectSize(btn) {
+      document.querySelectorAll('#qv-size-selector button').forEach(b => {
+        b.classList.remove('bg-brand-black', 'text-white');
+        b.classList.add('bg-white', 'text-brand-black');
+      });
+      btn.classList.remove('bg-white', 'text-brand-black');
+      btn.classList.add('bg-brand-black', 'text-white');
+      selectedQuickViewSize = btn.textContent.trim();
+    }
+
+    function toggleMobileMenu(open) {
+      const mobileDrawer = document.getElementById('mobile-menu-drawer');
+      if (open) {
+        mobileDrawer.classList.remove('-translate-x-full');
+      } else {
+        mobileDrawer.classList.add('-translate-x-full');
+      }
+    }
+
+    function toggleSearchModal(open) {
+      const searchModal = document.getElementById('search-modal');
+      const input = document.getElementById('catalog-search-input');
+      if (open) {
+        searchModal.classList.remove('hidden');
+        setTimeout(() => input.focus(), 100);
+      } else {
+        searchModal.classList.add('hidden');
+      }
+    }
+
+    function quickFillSearch(term) {
+      const input = document.getElementById('catalog-search-input');
+      input.value = term;
+      handleLiveSearch(term);
+    }
+
+    function handleLiveSearch(query) {
+      const hitsBox = document.getElementById('search-hits');
+      const term = query.toLowerCase().trim();
+
+      if (!term) {
+        hitsBox.innerHTML = '';
+        return;
+      }
+
+      const matches = PRODUCTS.filter(p => 
+        p.name.toLowerCase().includes(term) || 
+        p.brand.toLowerCase().includes(term) || 
+        p.colorway.toLowerCase().includes(term) ||
+        p.category.toLowerCase().includes(term)
+      );
+
+      if (matches.length === 0) {
+        hitsBox.innerHTML = `<p class="text-xs text-neutral-400 py-3">No running kit matches "${query}". Try searching "Vaporfly", "Trail", or "Hoka".</p>`;
+        return;
+      }
+
+      hitsBox.innerHTML = matches.map(m => `
+        <div onclick="openQuickView('${m.id}'); toggleSearchModal(false)" class="flex items-center gap-3 p-2 hover:bg-neutral-50 rounded cursor-pointer transition border border-transparent hover:border-neutral-200">
+          <img src="${m.image}" class="w-10 h-10 object-contain bg-white rounded p-1 border">
+          <div class="flex-1">
+            <p class="text-xs font-bold text-brand-black">${m.brand} ${m.name}</p>
+            <p class="text-[10px] text-neutral-500">${m.colorway} • £${m.price}</p>
+          </div>
+          <span class="text-xs text-brand-black"><i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      `).join('');
+    }
+
+    /**
+     * User Wishlist Toggle
+     */
+    function toggleWishlist(btn, productName) {
+      const icon = btn.querySelector('i');
+      if (icon.classList.contains('fa-regular')) {
+        icon.classList.remove('fa-regular');
+        icon.classList.add('fa-solid', 'text-brand-accentRed');
+        openToast(`Saved ${productName} to your wishlist.`);
+      } else {
+        icon.classList.remove('fa-solid', 'text-brand-accentRed');
+        icon.classList.add('fa-regular');
+        openToast(`Removed from your wishlist.`);
+      }
+    }
+
+    /**
+     * Toast System
+     */
+    let toastTimeout;
+    function openToast(message) {
+      const toast = document.getElementById('toast-notification');
+      const msg = document.getElementById('toast-message');
+      if (!toast || !msg) return;
+
+      msg.textContent = message;
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.add('translate-y-24', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3500);
+    }
+
+    /**
+     * Newsletter Form submission
+     */
+    function handleNewsletterSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('newsletter-email');
+      if (input && input.value) {
+        openToast(`Welcome to the Paceline club! 10% discount sent to ${input.value}`);
+        input.value = '';
+      }
+    }
+
+    // Keyboard Accessibility (ESC to close modals)
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        toggleCartDrawer(false);
+        closeQuickView();
+        toggleSearchModal(false);
+        toggleMobileMenu(false);
+      }
+    });
+
+    // Initial page setup on window load
+    window.onload = function() {
+      renderProducts(PRODUCTS);
+      updateCartBadge();
+      renderCartUI();
+    };
+  </script>
+</body>
+</html>
